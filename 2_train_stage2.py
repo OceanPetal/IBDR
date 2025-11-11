@@ -26,7 +26,6 @@ class Trainer(object):
         optimizer = torch.optim.SGD(model.parameters(), lr=lr, momentum=args.momentum,
                                     weight_decay=args.weight_decay, nesterov=args.nesterov)
         self.criterion = IICBLoss(alpha=1, beta=0.2, gamma=0.1, delta=0.1, eta=0.1, tau=0.4)
-        self.loss_weight_scheduler = AdaptiveWeightScheduler(total_epochs=args.epochs)
         self.model, self.optimizer = model, optimizer
         self.evaluator = Evaluator(self.nclass)
         self.scheduler = LR_Scheduler(args.lr_scheduler, args.lr,
